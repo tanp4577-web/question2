@@ -5,7 +5,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-                // Pulls down the code from your repository
                 checkout scm
             }
         }
@@ -13,7 +12,6 @@ pipeline {
         stage('Generate Report') {
             steps {
                 echo 'Generating report...'
-                // Native Windows command creating a text report since generate_report.bat is missing
                 bat '''
                 echo === Execution Report === > build_report.txt
                 echo Job Name: %JOB_NAME% >> build_report.txt
@@ -36,7 +34,6 @@ pipeline {
         stage('Archive Report') {
             steps {
                 echo 'Archiving build artifacts...'
-                // Saves the generated report file into Jenkins build storage
                 archiveArtifacts artifacts: 'build_report.txt', allowEmptyArchive: false
             }
         }
